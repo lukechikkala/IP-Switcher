@@ -158,7 +158,7 @@ Current Status:
 	##													##
 	######################################################
 
-	If the user presses "Statc", the frame should contain text like:
+	If the user presses "Static", the frame should contain text like:
 
 	#### IP Info #########################################
 	##													##
