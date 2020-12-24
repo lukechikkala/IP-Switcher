@@ -162,7 +162,7 @@ Current Status:
 
 	#### IP Info #########################################
 	##													##
-	##	Setting up static IP Addresses					##
+	##	Setting up Static IP Addresses					##
 	##													##
 	##	╭───────────────────────────╮					##
 	##	│░░░░░░░░░░░				│	42%				##
