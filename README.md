@@ -4,8 +4,8 @@ At the moment, the tool only interacts with a network interface named "Ethernet 
 Once the core structured is implemented, I will implement a way to select the network interface.
 
 There are two versions of the tool:<br>
-* ![Commandline Utility](https://github.com/lukechikkala/IP-Switcher/blob/master/Win10_Batch_File/IP%20Switcher.bat)
-* ![GUI](https://github.com/lukechikkala/IP-Switcher/tree/master/GUI)
+* [Commandline Utility](https://github.com/lukechikkala/IP-Switcher/blob/master/Win10_Batch_File/IP%20Switcher.bat)
+* [GUI](https://github.com/lukechikkala/IP-Switcher/tree/master/GUI)
 
 The tools assigns the following Static IP Addresses:<br>
 * `192.168.1.77` - This will be the primary IP Address.<br>
