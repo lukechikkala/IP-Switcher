@@ -1,0 +1,13 @@
+Current Features:
+	Currently all the messages are printed solely on the terminal.
+	Clears screen
+	Prints:
+		Wi-Fi IP Address
+		Wi-Fi Subnet Mask
+		List of Network Interfaces
+
+Next Steps:
+	Allow the user to select the network interface.
+	Create a viewer where messages can be printed.
+	Change button size
+	Change UI Color
