@@ -11,3 +11,27 @@ Next Steps:
 	Create a viewer where messages can be printed.
 	Change button size
 	Change UI Color
+
+Useful Functions:
+	List of Interfaces:
+		ImGuiComboFlags_PopupAlignLeft
+		ImGuiComboFlags_NoArrowButton
+
+	Progress Bar?
+
+	Viewer:
+		Querying Window Status (Focused/Hovered etc.)
+		Embed everything inside a child window for testing _RootWindow flag.
+
+		Clipping
+			Line 1 hello
+			Line 2 clip me!
+		ImGui::PushClipRect():
+		// There is a, what seems like a, viewer where this function is used. The color is boring though.
+
+	Moving windows:
+		Normal buttons Banana Apple Corniflower
+		Manual wrapping
+
+		Clipping: placement of elements next to each other.
+
