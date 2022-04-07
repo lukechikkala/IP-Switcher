@@ -68,7 +68,7 @@ int main()
 							window_flags |= ImGuiWindowFlags_NoTitleBar;
 //							window_flags |= ImGuiWindowFlags_NoScrollbar;
 							window_flags |= ImGuiWindowFlags_MenuBar;
-//							window_flags |= ImGuiWindowFlags_NoMove;
+							window_flags |= ImGuiWindowFlags_NoMove;
 //							window_flags |= ImGuiWindowFlags_NoResize;
 //							window_flags |= ImGuiWindowFlags_NoCollapse;
 //							window_flags |= ImGuiWindowFlags_NoNav;
@@ -97,6 +97,37 @@ int main()
 			system("ipconfig getoption en0 subnet_mask");
 		if (ImGui::Button("Network Interface List"))
 			system("networksetup -listallnetworkservices");
+
+
+
+
+		const char* items[] = {
+			"Wi-Fi",
+			"Network Port",
+			"Bluetooth"
+		};
+		static int item_current_idx = 0; // Here we store our selection data as an index.
+		const char* combo_preview_value = items[item_current_idx];  // Pass in the preview value visible before opening the combo (it could be anything)
+		if (ImGui::BeginCombo("Network Interface", combo_preview_value, ImGuiComboFlags_NoArrowButton))
+		{
+			for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+			{
+				const bool is_selected = (item_current_idx == n);
+				if (ImGui::Selectable(items[n], is_selected))
+					item_current_idx = n;
+
+				// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+				if (is_selected)
+					ImGui::SetItemDefaultFocus();
+			}
+			ImGui::EndCombo();
+		}
+
+
+
+
+
+
 		ImGui::End();
 		// --> Program End
 
