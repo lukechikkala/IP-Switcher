@@ -16,4 +16,7 @@ The tools assigns the following Static IP Addresses:<br>
 
 ## Screenshots
 ### macOS
-!(img)[GUI/Screenshots/macOS.png]
+![img](GUI/Screenshots/macOS.png)
+
+### macOS ImGUI Version
+![img](ImGui/docs/macOS_ImGUI.png)

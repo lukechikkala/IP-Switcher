@@ -91,15 +91,13 @@ int main()
 			}
 			ImGui::EndMenuBar();
 		}
+
 		if (ImGui::Button("Print IP Address"))
 			system("ifconfig en0 | grep mas | sed -E 's/.*inet //' | sed -E 's/ netmask.*//'");
 		if (ImGui::Button("Print Subnet Mask"))
 			system("ipconfig getoption en0 subnet_mask");
-		if (ImGui::Button("Network Interface List"))
-			system("networksetup -listallnetworkservices");
-
-
-
+		if (ImGui::Button("Print NIC List"))
+			system("networksetup -listallnetworkservices | grep -v \"*\"");
 
 		const char* items[] = {
 			"Wi-Fi",
@@ -108,7 +106,7 @@ int main()
 		};
 		static int item_current_idx = 0; // Here we store our selection data as an index.
 		const char* combo_preview_value = items[item_current_idx];  // Pass in the preview value visible before opening the combo (it could be anything)
-		if (ImGui::BeginCombo("Network Interface", combo_preview_value, ImGuiComboFlags_NoArrowButton))
+		if (ImGui::BeginCombo("Dummy NIC List", combo_preview_value, ImGuiComboFlags_NoArrowButton))
 		{
 			for (int n = 0; n < IM_ARRAYSIZE(items); n++)
 			{
@@ -122,11 +120,6 @@ int main()
 			}
 			ImGui::EndCombo();
 		}
-
-
-
-
-
 
 		ImGui::End();
 		// --> Program End
