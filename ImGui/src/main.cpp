@@ -69,9 +69,9 @@ int main()
 //							window_flags |= ImGuiWindowFlags_NoScrollbar;
 							window_flags |= ImGuiWindowFlags_MenuBar;
 							window_flags |= ImGuiWindowFlags_NoMove;
-//							window_flags |= ImGuiWindowFlags_NoResize;
-//							window_flags |= ImGuiWindowFlags_NoCollapse;
-//							window_flags |= ImGuiWindowFlags_NoNav;
+							window_flags |= ImGuiWindowFlags_NoResize;
+							window_flags |= ImGuiWindowFlags_NoCollapse;
+							window_flags |= ImGuiWindowFlags_NoNav;
 							window_flags |= ImGuiWindowFlags_NoBackground;
 //							window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
 //							window_flags |= ImGuiWindowFlags_UnsavedDocument;
@@ -91,13 +91,6 @@ int main()
 			}
 			ImGui::EndMenuBar();
 		}
-
-		if (ImGui::Button("Print IP Address"))
-			system("ifconfig en0 | grep mas | sed -E 's/.*inet //' | sed -E 's/ netmask.*//'");
-		if (ImGui::Button("Print Subnet Mask"))
-			system("ipconfig getoption en0 subnet_mask");
-		if (ImGui::Button("Print NIC List"))
-			system("networksetup -listallnetworkservices | grep -v \"*\"");
 
 		const char* items[] = {
 			"Wi-Fi",
@@ -120,6 +113,16 @@ int main()
 			}
 			ImGui::EndCombo();
 		}
+
+		ImGui::Separator();
+		if (ImGui::Button("Print IP Address "))
+			system("ifconfig en0 | grep mas | sed -E 's/.*inet //' | sed -E 's/ netmask.*//'");
+		
+		if (ImGui::Button("Print Subnet Mask"))
+			system("ipconfig getoption en0 subnet_mask");
+		
+		if (ImGui::Button("Print NIC List   "))
+			system("networksetup -listallnetworkservices | grep -v \"*\"");
 
 		ImGui::End();
 		// --> Program End
