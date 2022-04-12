@@ -22,13 +22,13 @@ int main()
 		perror("ERROR");
 
 	std::cout << NICs[5] << std::endl;														// NIC's sample Output
-	std::string Networks[1024];																// "Networks" of string data type
+	std::string Networks;																// "Networks" of string data type
 	// for (int i = 0 ; i < 20 ; i++)
 	// {
 	// 	std::cout << Networks[i] << std::endl;													// NIC's sample Output
 	// 	// if (NICs[i] == '\n')
 	// 	// 	std::cout << "BREAK" << std::endl;
 	// }
-	Networks[1] = NICs[1];
-	std::cout << Networks[1] << std::endl;
+	Networks += NICs;
+	std::cout << Networks << std::endl;
 }
