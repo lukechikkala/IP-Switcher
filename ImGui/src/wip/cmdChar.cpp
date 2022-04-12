@@ -4,12 +4,6 @@
 
 int main()
 {
-	// // const char* items[] = {
-	// // 	"Wi-Fi",
-	// // 	"Network Port",
-	// // 	"Bluetooth"
-	// // 	};
-	// const char cmd = system("networksetup -listallnetworkservices | grep -v \"*\"");
 	FILE *cmd = popen("networksetup -listallnetworkservices | grep -v \"*\"", "r");			// Stores list of NIC in "cmd"
 	static char NICs[1024];
 	size_t n;
@@ -17,11 +11,9 @@ int main()
 	{
 		NICs[n] = '\0';																		// Stores "cmd" in "NICs"
 	}
-	// std::cout << cmd << std::endl;
 	if (pclose(cmd) < 0)
 		perror("ERROR");
 
-	std::cout << NICs[5] << std::endl;														// NIC's sample Output
 	std::string Networks;																// "Networks" of string data type
 	// for (int i = 0 ; i < 20 ; i++)
 	// {
@@ -30,5 +22,14 @@ int main()
 	// 	// 	std::cout << "BREAK" << std::endl;
 	// }
 	Networks += NICs;
-	std::cout << Networks << std::endl;
+	int Network_Size = sizeof(NICs);	// 218 at the moment
+	// std::cout << Networks << std::endl;
+	char val1 = 'A';
+	char val2 = 'b';
+
+	for (int i = 0 ; i < Network_Size ; i++)
+	{
+		if(NICs[i] == '\n')
+			std::cout << "GOTCHA" << std::endl;
+	}
 }
