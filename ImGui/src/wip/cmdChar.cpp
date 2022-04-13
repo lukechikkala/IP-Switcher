@@ -4,50 +4,47 @@
 
 int main()
 {
-	FILE *cmd = popen("networksetup -listallnetworkservices | grep -v \"*\"", "r");			// Stores list of NIC in "cmd"
+	FILE *GetNICListRaw = popen("networksetup -listallnetworkservices | grep -v \"*\"", "r");
 	static char NICs[1024];
-	size_t n;
-	while ((n == fread(NICs, 1, sizeof(NICs)-1, cmd)) > 0)
+	size_t SomeNomadicVarN;
+	while ((SomeNomadicVarN == fread(NICs, 1, sizeof(NICs)-1, GetNICListRaw)) > 0)
 	{
-		NICs[n] = '\0';																		// Stores "cmd" in "NICs"
+		NICs[SomeNomadicVarN] = '\0';
 	}
-	if (pclose(cmd) < 0)
+	if (pclose(GetNICListRaw) < 0)
 		perror("ERROR");
 
-	std::string Networks;																// "Networks" of string data type
-	Networks += NICs;
-/*
-############################################################
-WORKING EXAMPLE
-############################################################
-*/
-	// int Network_Size = sizeof(NICs);	// 218 at the moment
-	// std::string Network_List[10];
-	// for (int i = 0 ; i < Network_Size ; i++)
+	std::string Nx;
+	Nx += NICs;
+
+	int NetworkListSize = sizeof(NICs);
+	std::string Network_List[100];
+	int NetworkListCount = 0;
+	for (int i = 0 ; i < NetworkListSize ; i++)
+		if(NICs[i] == '\n')
+			NetworkListCount = NetworkListCount + 1;
+
+	std::cout << "No. of Interfaces: " << NetworkListCount << std::endl;
+	size_t FoundNewLine;
+	FoundNewLine = Nx.find_first_of('\n');
+
+	for (int i = 0 ; i < NetworkListCount ; i++)
+	{
+		Network_List[i] = Nx.substr(0, Nx.find('\n'));
+		Nx = Nx.replace(0,Nx.find('\n'), 4, 0);
+		Nx = Nx.substr(FoundNewLine);
+	}
+
+	std::cout << Network_List[2] << std::endl;
+
+	// for (int i = 0 ; i < NetworkListCount ; i++)
 	// {
-	// 	if(NICs[i] == '\n')
-	// 	{
-	// 		Networks = Networks.substr(0, Networks.find('p'));
-	// 		// Network_List[i] = Networks;
-	// 	}
+	// 	const char* items[i] = i;
 	// }
-/*
-############################################################
-END OF WORKING EXAMPLE
-############################################################
-*/
-
-
-/*
-############################################################
-TRYING TO CATCH THE LAST NEW LINE; BUT THIS IS BEING A PAIN IN THE ASS
-############################################################
-*/
-
-	std::cout << Networks << std::endl;
-	std::cout << "==========================" << std::endl;
-	std::size_t found = Networks.find_last_of('\n');
-	std::string NewNetwork = Networks.substr(found-10);
-	std::cout << NewNetwork << std::endl;
-	// std::cout << Network_List[1] << std::endl;
+	// const char* items[] = 	{
+	// 							"Wi-Fi",
+	// 							"Network Port",
+	// 							"Bluetooth"
+	// 						};
+	// std::cout << items[1] << std::endl;
 }
