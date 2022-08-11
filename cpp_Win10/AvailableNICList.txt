@@ -1,1 +1,1 @@
-Wi-Fi
+Npcap Loopback Adapter
