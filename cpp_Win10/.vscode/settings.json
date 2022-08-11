@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "regex": "cpp"
+        "regex": "cpp",
+        "xlocale": "cpp",
+        "xlocinfo": "cpp",
+        "xstring": "cpp"
     }
 }

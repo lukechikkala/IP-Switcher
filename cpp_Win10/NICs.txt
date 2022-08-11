@@ -1,6 +1,0 @@
-
-Admin State    State          Type             Interface Name
--------------------------------------------------------------------------
-Enabled        Connected      Dedicated        Wi-Fi
-Enabled        Connected      Dedicated        Npcap Loopback Adapter
-
