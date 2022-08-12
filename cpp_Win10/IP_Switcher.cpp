@@ -96,7 +96,7 @@ int main()
 	std::cin >> UserInput_Mode;
 	if ( UserInput_Mode == 0 )
 	{
-		std::cout << "You chose " << IPMode[UserInput_Mode] << std::endl;
+		std::cout << "You chose \"" << IPMode[UserInput_Mode] << "\" Mode" << std::endl;
 	}
 	else if ( UserInput_Mode == 1 )
 	{
@@ -115,15 +115,46 @@ int main()
 	std::cout << "Result: " << std::endl;
 	if ( UserInput_Mode == 0 )
 	{
-		std::string StaticIP_cmd = "netsh int ipv4 set address name=\"" + NICs[NICID] + "\" static 192.168.1.77 255.255.255.0";
-		std::cout << "\t";
-		system(StaticIP_cmd.c_str());
+	//  -- IP::1 --------------------------------------------------------------------------------------------------------------------------------------
+		std::string StaticIP_cmd = "netsh int ipv4 set address name=\"" + NICs[UserInput_NIC] + "\" static 192.168.1.77 255.255.255.0";
+			 system(StaticIP_cmd.c_str());
+	//  -- IP::2 --------------------------------------------------------------------------------------------------------------------------------------
+					StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 2.168.1.77 255.0.0.0";
+			 system(StaticIP_cmd.c_str());
+	//  -- IP::3 --------------------------------------------------------------------------------------------------------------------------------------
+					StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 10.168.1.77 255.0.0.0";
+			 system(StaticIP_cmd.c_str());
+	//  -- IP::4 --------------------------------------------------------------------------------------------------------------------------------------
+					StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.0.77 255.255.255.0";
+			 system(StaticIP_cmd.c_str());
+	//  -- IP::5 --------------------------------------------------------------------------------------------------------------------------------------
+					StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.3.77 255.255.255.0";
+			 system(StaticIP_cmd.c_str());
+	//  -- IP::6 --------------------------------------------------------------------------------------------------------------------------------------
+					StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.100.77 255.255.255.0";
+			 system(StaticIP_cmd.c_str());
+	//  -----------------------------------------------------------------------------------------------------------------------------------------------
+		std::string GetAssignedIPAddresses = "netsh interface ip show config name=\"" + NICs[UserInput_NIC] + "\" | findstr \"IP Address\"";
+		for ( i = 0 ; i < 10 ; i++ )
+		{
+			std::cout << ".";
+			Sleep(1000);
+		}
+		std::cout << "\n";
+		system(GetAssignedIPAddresses.c_str());
 	}
 	else if ( UserInput_Mode == 1 )
 	{
-		std::string DHCP_cmd = "netsh int ipv4 set address \"" + NICs[NICID] + "\" dhcp";
-		std::cout << "\t";
-		system(DHCP_cmd.c_str());
+		std::string DHCP_cmd = "netsh int ipv4 set address name=\"" + NICs[UserInput_NIC] + "\" dhcp";
+			 system(DHCP_cmd.c_str());
+		std::string GetAssignedIPAddresses = "netsh interface ip show config name=\"" + NICs[UserInput_NIC] + "\" | findstr \"IP Address\"";
+		for ( i = 0 ; i < 10 ; i++ )
+		{
+			std::cout << ".";
+			Sleep(1000);
+		}
+		std::cout << "\n";
+		system(GetAssignedIPAddresses.c_str());
 	}
 //	---------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -132,17 +163,15 @@ int main()
 //	-- CleanUp ----------------------------------------------------------------------------------------------------------------------------------------
 	system("del NICs.txt");
 	system("del AvailableNICList.txt");
-	std::cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"	<< std::endl;
-	for ( i = 0 ; i < 5 ; i++ )
-	{
-		std::cout << 5-i << std::endl;
-		Sleep(1000);
-	}
+	std::cout << "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"	<< std::endl;
+	Sleep(10000);
 //	---------------------------------------------------------------------------------------------------------------------------------------------------
 }
 
 /*
 	Need testing with active adaptor.
 	Need to build safety precautions around "Set" options.
+	Check if the network cable is connected in the first place.
+	Need better progress bars.
 	https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkadapter
 */
