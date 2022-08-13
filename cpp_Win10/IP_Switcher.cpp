@@ -11,7 +11,11 @@ int main()
 					AvailableNICList;					// To handle AvailableNICList.txt	[ filters NICs.txt to show only enabled NICs ]
 	std::string		AvailableNICs,						// A string to store filtered text from NICs.txt.
 					NICs[10],							// An array to map the enabled NICs to allow for selection.
-					IPMode[2] = { "Static", "DHCP" };	// 0: Static | 1: DHCP
+					IPMode[2] = { "Static", "DHCP" },	// 0: Static | 1: DHCP
+					line,								// Used to get single line from NICs.txt and store regex-ed version in AvailableNICs as string. 
+					StaticIP_cmd,						// Used to execute OS commands for setting static IP Addresses.
+					DHCP_cmd,							// Used to execute OS commands for setting DHCP IP Address.
+					GetAssignedIPAddresses;				// Used to receive assigned IP Address.
 	std::regex		RegularExpression(".*  ");			// Regex used for filtering NICs.txt.
 	int				i		= 0,						// Counter.
 					NICID	= 0,						// An array for mappaing enabled NICs.
@@ -31,12 +35,11 @@ int main()
 	TempNICList.open("NICs.txt", std::ios::in);
 	if ( TempNICList.is_open() )
 	{
-		std::string line;
 		while ( getline( TempNICList , line ) )
 		{
-			if ( line.find ("Enabled" ) != std::string::npos )
+			if ( line.find( "Enabled" ) != std::string::npos )
 			{
-				AvailableNICs = std::regex_replace(line, RegularExpression, "");
+				AvailableNICs = std::regex_replace( line, RegularExpression, "" );
 				NICs[NICID] = AvailableNICs;
 				NICID = NICID + 1;
 			}
@@ -59,6 +62,7 @@ int main()
 	std::cout << "┃ ██║██╔═══╝     ╚════██║██║███╗██║██║   ██║   ██║     ██╔══██║██╔══╝  ██╔══██╗ ┃"	<< std::endl;
 	std::cout << "┃ ██║██║         ███████║╚███╔███╔╝██║   ██║   ╚██████╗██║  ██║███████╗██║  ██║ ┃"	<< std::endl;
 	std::cout << "┃ ╚═╝╚═╝         ╚══════╝ ╚══╝╚══╝ ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ┃"	<< std::endl;
+	std::cout << "┃                                                by lukechikkala                ┃"	<< std::endl;
 	std::cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"	<< std::endl;
 	std::cout << "                            ╭──────────────────────╮ "								<< std::endl;
 	std::cout << "                            │ " << NICID << " NICs are available │ "					<< std::endl;
@@ -116,25 +120,25 @@ int main()
 	if ( UserInput_Mode == 0 )
 	{
 	//  -- IP::1 --------------------------------------------------------------------------------------------------------------------------------------
-		std::string StaticIP_cmd = "netsh int ipv4 set address name=\"" + NICs[UserInput_NIC] + "\" static 192.168.1.77 255.255.255.0";
-			 system(StaticIP_cmd.c_str());
+		StaticIP_cmd = "netsh int ipv4 set address name=\"" + NICs[UserInput_NIC] + "\" static 192.168.1.77 255.255.255.0";
+		system(StaticIP_cmd.c_str());
 	//  -- IP::2 --------------------------------------------------------------------------------------------------------------------------------------
-					StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 2.168.1.77 255.0.0.0";
-			 system(StaticIP_cmd.c_str());
+		StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 2.168.1.77 255.0.0.0";
+		system(StaticIP_cmd.c_str());
 	//  -- IP::3 --------------------------------------------------------------------------------------------------------------------------------------
-					StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 10.168.1.77 255.0.0.0";
-			 system(StaticIP_cmd.c_str());
+		StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 10.168.1.77 255.0.0.0";
+		system(StaticIP_cmd.c_str());
 	//  -- IP::4 --------------------------------------------------------------------------------------------------------------------------------------
-					StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.0.77 255.255.255.0";
-			 system(StaticIP_cmd.c_str());
+		StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.0.77 255.255.255.0";
+		system(StaticIP_cmd.c_str());
 	//  -- IP::5 --------------------------------------------------------------------------------------------------------------------------------------
-					StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.3.77 255.255.255.0";
-			 system(StaticIP_cmd.c_str());
+		StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.3.77 255.255.255.0";
+		system(StaticIP_cmd.c_str());
 	//  -- IP::6 --------------------------------------------------------------------------------------------------------------------------------------
-					StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.100.77 255.255.255.0";
-			 system(StaticIP_cmd.c_str());
+		StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.100.77 255.255.255.0";
+		system(StaticIP_cmd.c_str());
 	//  -----------------------------------------------------------------------------------------------------------------------------------------------
-		std::string GetAssignedIPAddresses = "netsh interface ip show config name=\"" + NICs[UserInput_NIC] + "\" | findstr \"IP Address\"";
+		GetAssignedIPAddresses = "netsh interface ip show config name=\"" + NICs[UserInput_NIC] + "\" | findstr \"IP Address\"";
 		for ( i = 0 ; i < 10 ; i++ )
 		{
 			std::cout << ".";
@@ -145,9 +149,9 @@ int main()
 	}
 	else if ( UserInput_Mode == 1 )
 	{
-		std::string DHCP_cmd = "netsh int ipv4 set address name=\"" + NICs[UserInput_NIC] + "\" dhcp";
+		DHCP_cmd = "netsh int ipv4 set address name=\"" + NICs[UserInput_NIC] + "\" dhcp";
 			 system(DHCP_cmd.c_str());
-		std::string GetAssignedIPAddresses = "netsh interface ip show config name=\"" + NICs[UserInput_NIC] + "\" | findstr \"IP Address\"";
+		GetAssignedIPAddresses = "netsh interface ip show config name=\"" + NICs[UserInput_NIC] + "\" | findstr \"IP Address\"";
 		for ( i = 0 ; i < 10 ; i++ )
 		{
 			std::cout << ".";
