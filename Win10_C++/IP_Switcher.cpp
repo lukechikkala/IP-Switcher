@@ -3,6 +3,7 @@
 #include <string>
 #include <regex>
 #include <windows.h>
+#include "include/os_cmd.h"								// LC_OS_CMD(std::string cmd);
 
 int main()
 {
@@ -26,7 +27,7 @@ int main()
 
 
 //	-- Get All NIC ------------------------------------------------------------------------------------------------------------------------------------
-	system("netsh interface show interface > NICs.txt");
+	LC_OS_CMD("netsh interface show interface > NICs.txt");
 //	---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -121,22 +122,22 @@ int main()
 	{
 	//  -- IP::1 --------------------------------------------------------------------------------------------------------------------------------------
 		StaticIP_cmd = "netsh int ipv4 set address name=\"" + NICs[UserInput_NIC] + "\" static 192.168.1.77 255.255.255.0";
-		system(StaticIP_cmd.c_str());
+		LC_OS_CMD(StaticIP_cmd.c_str());
 	//  -- IP::2 --------------------------------------------------------------------------------------------------------------------------------------
 		StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 2.168.1.77 255.0.0.0";
-		system(StaticIP_cmd.c_str());
+		LC_OS_CMD(StaticIP_cmd.c_str());
 	//  -- IP::3 --------------------------------------------------------------------------------------------------------------------------------------
 		StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 10.168.1.77 255.0.0.0";
-		system(StaticIP_cmd.c_str());
+		LC_OS_CMD(StaticIP_cmd.c_str());
 	//  -- IP::4 --------------------------------------------------------------------------------------------------------------------------------------
 		StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.0.77 255.255.255.0";
-		system(StaticIP_cmd.c_str());
+		LC_OS_CMD(StaticIP_cmd.c_str());
 	//  -- IP::5 --------------------------------------------------------------------------------------------------------------------------------------
 		StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.3.77 255.255.255.0";
-		system(StaticIP_cmd.c_str());
+		LC_OS_CMD(StaticIP_cmd.c_str());
 	//  -- IP::6 --------------------------------------------------------------------------------------------------------------------------------------
 		StaticIP_cmd = "netsh int ipv4 add address name=\"" + NICs[UserInput_NIC] + "\" 192.168.100.77 255.255.255.0";
-		system(StaticIP_cmd.c_str());
+		LC_OS_CMD(StaticIP_cmd.c_str());
 	//  -----------------------------------------------------------------------------------------------------------------------------------------------
 		GetAssignedIPAddresses = "netsh interface ip show config name=\"" + NICs[UserInput_NIC] + "\" | findstr \"IP Address\"";
 		for ( i = 0 ; i < 10 ; i++ )
@@ -145,12 +146,12 @@ int main()
 			Sleep(1000);
 		}
 		std::cout << "\n";
-		system(GetAssignedIPAddresses.c_str());
+		LC_OS_CMD(GetAssignedIPAddresses.c_str());
 	}
 	else if ( UserInput_Mode == 1 )
 	{
 		DHCP_cmd = "netsh int ipv4 set address name=\"" + NICs[UserInput_NIC] + "\" dhcp";
-			 system(DHCP_cmd.c_str());
+			 LC_OS_CMD(DHCP_cmd.c_str());
 		GetAssignedIPAddresses = "netsh interface ip show config name=\"" + NICs[UserInput_NIC] + "\" | findstr \"IP Address\"";
 		for ( i = 0 ; i < 10 ; i++ )
 		{
@@ -158,17 +159,18 @@ int main()
 			Sleep(1000);
 		}
 		std::cout << "\n";
-		system(GetAssignedIPAddresses.c_str());
+		LC_OS_CMD(GetAssignedIPAddresses.c_str());
 	}
 //	---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
 //	-- CleanUp ----------------------------------------------------------------------------------------------------------------------------------------
-	system("del NICs.txt");
-	system("del AvailableNICList.txt");
+	LC_OS_CMD("del NICs.txt");
+	LC_OS_CMD("del AvailableNICList.txt");
 	std::cout << "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"	<< std::endl;
 	Sleep(10000);
+	return 0;
 //	---------------------------------------------------------------------------------------------------------------------------------------------------
 }
 
