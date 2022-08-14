@@ -16,4 +16,4 @@ The tools currently assigns the following Static IP Addresses:<br>
 
 ## How it works?
 ### Win 10 Commandline Version
-![vid](Win10_C++/media/IP_Switcher.mp4)
+https://user-images.githubusercontent.com/23566967/184523237-4496bda9-5436-4eca-a5ce-542b2b6c7eaf.mp4
