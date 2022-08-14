@@ -1,4 +1,4 @@
-[logo](Win10_C++/media/Logo1.png)
+![logo](Win10_C++/media/Logo1.png)
 
 # IP-Switcher
 Quick tool that switches the selected interface's IP Address from a bunch of static addresses to DHCP or vice versa.<br>
