@@ -17,7 +17,7 @@ The tools currently assigns the following Static IP Addresses:<br>
 * `192.168.100.77`<br>
 
 NOTE:
-Run IP_Switcher.exe as Administrator.
+Run `IP_Switcher.exe` as Administrator.
 
 ## How it works?
 ### Win 10 Commandline Version
