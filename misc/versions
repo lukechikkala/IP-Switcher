@@ -1,0 +1,8 @@
+v0.0.1.0	Batch
+v0.0.2.0	GTK
+v0.0.3.0	ImGUI
+v0.0.3.1	ImGUI // Able to list NICs
+v0.0.4.0	C++ version
+v0.0.4.1	C++ // Now able to select Interfaces with numbers
+v0.0.4.2	C++ // Now able to execute commands
+v0.0.4.3	C++ // Use of functions.
