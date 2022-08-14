@@ -49,10 +49,12 @@ int main()
 		}
 		TempNICList.close();
 	}
-
-	AvailableNICList.open("AvailableNICList.txt", std::ios::out);
-	AvailableNICList << AvailableNICs;
-	AvailableNICList.close();
+	TempNICList.open("NICs.txt", std::ios::out);
+	if ( TempNICList.is_open() )
+	{
+		TempNICList << AvailableNICs;
+		TempNICList.close();
+	}
 //	---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -151,7 +153,6 @@ int main()
 
 //	-- CleanUp ----------------------------------------------------------------------------------------------------------------------------------------
 	LC_OS_CMD("del NICs.txt");
-	LC_OS_CMD("del AvailableNICList.txt");
 	std::cout << "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"	<< std::endl;
 	Sleep(10000);
 	return 0;

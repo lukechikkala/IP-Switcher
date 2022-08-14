@@ -1,0 +1,52 @@
+int main()
+{
+	if		OS == Win()
+		IPSC_Win();
+	elseif	OS == macOS()
+		IPSC_macOS();
+	elseif	OS == Linuix()
+		IPSC_Tux();
+	else
+		return 1;
+}
+
+Get_NICs.h
+	void IPSW_Get_Win_NICs();
+	{
+		TempNICList.open("NICs.txt", std::ios::in);
+		if ( TempNICList.is_open() )
+		{
+			while ( getline ( TempNICList , line ) )
+			{
+				if ( line.find ( "Enabled" ) != std::string::npos )
+				{
+					AvailableNICs = std::regex_replace ( line , RegularExpression , "" );
+					NICs[NICID] = AvailableNICs;
+					NICID = NICID + 1;
+				}
+			}
+			TempNICList.close();
+		}
+		TempNICList.open("NICs.txt", std::ios::out);
+		if ( TempNICList.is_open() )
+		{
+			TempNICList << AvailableNICs;
+			TempNICList.close();
+		}
+	return NICID, NICs;
+	}
+
+	void IPSW_Get_macOS_NICs();
+
+
+void IPSW_Win()
+	system("title IP Switcher");
+	system("netsh interface show interface > NICs.txt");
+	IPSW_Get_Win_NICs();
+	LC_Title();
+	LC_TotalNICs( NICID , NICs );
+	LC_UserInput_NIC();
+	LC_UserInput_IPMode();
+	LC_Win_Set_IPMode();
+	LC_Win_CleanUp();
+	LC_Wait(10);
