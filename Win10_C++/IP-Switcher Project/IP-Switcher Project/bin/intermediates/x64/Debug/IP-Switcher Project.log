@@ -1,0 +1,3 @@
+﻿  IPSwitcher.cpp
+C:\dev\cpp\Programs\IP-Switcher Project\IP-Switcher Project\include\prints.hpp(15,6): warning C4101: 'i': unreferenced local variable
+  IP-Switcher Project.vcxproj -> C:\dev\cpp\Programs\IP-Switcher Project\IP-Switcher Project\bin\x64\Debug\IP-Switcher Project.exe
